@@ -9,7 +9,7 @@ This is an educational implementation of a column-oriented storage engine, inspi
 **Columnar Storage Engine** is composed of:
 
 - **ColumnStore**: Manages multiple segments, each representing a columnar block.
-- **Segment**: Stores data in column-oriented format (each column as a file).
+- **ColumnSegment**: Stores data in column-oriented format (each column as a file).
 - **Encoders**: Apply compression (e.g., Run-Length Encoding, Dictionary Encoding).
 - **Metadata**: Stores column statistics like `min`, `max`, and `nulls` for pruning.
 
@@ -22,7 +22,7 @@ This is an educational implementation of a column-oriented storage engine, inspi
 - `ColumnStore`
   - `write(record_dict)`
   - `read(filter_column=None, min=None, max=None)`
-- `Segment`
+- `ColumnSegment`
   - Each column written to its own file (`col_name.col`)
 - Plain data (no compression)
 
@@ -58,7 +58,7 @@ This is an educational implementation of a column-oriented storage engine, inspi
 ```python
 from column_store import ColumnStore
 
-cs = ColumnStore("data/segment1")
+cs = ColumnStore()
 
 cs.write({"name": "Alice", "age": 30})
 cs.write({"name": "Bob", "age": 25})
@@ -72,6 +72,7 @@ print(cs.read(filter_column="age", min=30))  # Only returns Alice (30, 35)
     columnar_store/
     │
     ├── column_store.py      # ColumnStore class
+    ├── column_segment.py      # ColumnSegment class
     └── tests/
         ├── test_column_store.py
 

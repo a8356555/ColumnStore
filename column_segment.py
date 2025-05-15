@@ -10,7 +10,7 @@ class ColumnSegment:
         self.data.append(val)
 
     def flush(self):
-        file_path = f"{self.column_name}_{self.id}.pkl"
+        file_path = f"{self.column_name}_{self.id}.col"
         with open(file_path, 'wb') as f:
             pickle.dump(self.data, f)
         self.data = []
@@ -18,7 +18,7 @@ class ColumnSegment:
 
     def load(self, id=None):
         id = id or self.id
-        file_path = f"{self.column_name}_{self.id}.pkl"
+        file_path = f"{self.column_name}_{self.id}.col"
         with open(file_path, 'rb') as f:
             self.data = pickle.load(f)
 

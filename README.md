@@ -20,7 +20,7 @@ This is an educational implementation of a column-oriented storage engine, inspi
 ### ✅ Version 1 – Basic Columnar Engine
 
 - `ColumnStore`
-  - `insert(record_dict)`
+  - `write(record_dict)`
   - `read(filter_column=None, min=None, max=None)`
 - `Segment`
   - Each column written to its own file (`col_name.col`)
@@ -60,9 +60,9 @@ from column_store import ColumnStore
 
 cs = ColumnStore("data/segment1")
 
-cs.insert({"name": "Alice", "age": 30})
-cs.insert({"name": "Bob", "age": 25})
-cs.insert({"name": "Alice", "age": 35})
+cs.write({"name": "Alice", "age": 30})
+cs.write({"name": "Bob", "age": 25})
+cs.write({"name": "Alice", "age": 35})
 
 print(cs.read(filter_column="age", min=30))  # Only returns Alice (30, 35)
 ```
@@ -89,12 +89,9 @@ pytest tests/
 ```
 
 ## 🔮 Future Work
-SQL parser
-
-gRPC / REST query API
-
-Zstd/Snappy compression
-
-Predicate pushdown optimization
-
-Segment cache
+* Column Chunking & Page Structure
+* SQL parser
+* gRPC / REST query API
+* Zstd/Snappy compression
+* Predicate pushdown optimization
+* Segment cache

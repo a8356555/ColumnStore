@@ -1,6 +1,7 @@
 from typing import List, Dict
 from column_segment import ColumnSegment
 
+
 class ColumnStore:
     def __init__(self):
         self.columnar_data = {}  # col: value_list
@@ -26,7 +27,8 @@ class ColumnStore:
         else:
             filtered_column_data = self.columnar_data[filter_column].read_all()
             filtered_indices = [
-                i for i, val in enumerate(filtered_column_data)
+                i
+                for i, val in enumerate(filtered_column_data)
                 if (min is None or val >= min) and (max is None or val <= max)
             ]
             row_count = len(filtered_indices)
